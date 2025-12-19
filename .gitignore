@@ -1,0 +1,4 @@
+tailwindcss.exe
+tailwindcss-windows-x64.exe
+*.exe
+node_modules/
