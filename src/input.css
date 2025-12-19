@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* This enables the default color palette and theme */
+@theme inline {
+  /* Tailwind v4 default colors are built-in when using the full import */
+}

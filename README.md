@@ -2,3 +2,10 @@
 Where Winds Meet - Tools by Pie
 
 -- Test 1 / Update to make sure things are all linked up with credentials, etc.
+
+-- Tailwind auto-build while editing... in CMD run:
+tailwindcss.exe -i ./src/input.css -o ./css/output.css --watch
+
+-- Tailwind build for production... in CMD run:
+tailwindcss.exe -i ./src/input.css -o ./css/output.css --minify
+(it purges unused classes, makes more lightweight)
