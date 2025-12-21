@@ -46,8 +46,8 @@ events.forEach(event => {
     div.className = 'bg-indigo-900 rounded p-2 shadow w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6';
     div.innerHTML = `
     <p class="font-semibold p-0 m-0 leading-none">${event.name}</p>
-    <p class="p-0 m-0 leading-none">${event.timeframe}</p>
-    <p class="text-sm p-0 m-0 leading-none">(Local Time)</p>
+    <p class="p-0 m-0 leading-none hidden">${event.timeframe}</p>
+    <p class="text-sm p-0 m-0 leading-none hidden">(Local Time)</p>
     <div id="${event.id}" class="font-mono text-cyan-300 p-0 m-0 leading-none">Calculating...</div>
     `;
     container.appendChild(div);
