@@ -104,7 +104,7 @@ function startCountdown(elementId, targetDay, targetHour, targetMinute = 0, even
         else if (hours >= 1) { parts.push(`${hours}h`); parts.push(`${minutes}m`); }
         else if (minutes >= 1) { parts.push(`${minutes}m`); }
         parts.push(`${seconds}s`);
-        displayText = parts.join(' ');
+        displayText = `Upcoming: ${parts.join(' ')}`;
     }
 
     element.textContent = displayText;
