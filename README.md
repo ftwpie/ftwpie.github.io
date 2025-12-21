@@ -9,3 +9,7 @@ tailwindcss.exe -i ./src/input.css -o ./css/output.css --watch
 -- Tailwind build for production... in CMD run:
 tailwindcss.exe -i ./src/input.css -o ./css/output.css --minify
 (it purges unused classes, makes more lightweight)
+
+############
+
+-- Test 2 / Update to style, add test images and content

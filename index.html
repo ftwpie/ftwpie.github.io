@@ -8,17 +8,18 @@
   <!-- Link to the built, minified Tailwind CSS (super small!) -->
   <link href="./css/output.css" rel="stylesheet">
 </head>
-<body class="min-h-full bg-gray-50 flex flex-col items-center justify-center">
+<body class="min-h-full bg-gray-900 text-gray-200 flex flex-col items-center justify-center">
 
-  <header class="w-full bg-blue-600 text-white py-8 text-center">
+  <header class="w-full bg-gray-800 py-8 text-center">
     <h1 class="text-4xl font-bold">Where Winds Meet Tools</h1>
     <p class="mt-4 text-xl">Built with Tailwind CSS – fast and lightweight</p>
   </header>
 
   <main class="flex-1 max-w-4xl mx-auto p-8">
+
     <!-- Add your content here with Tailwind classes -->
-    <section class="bg-white shadow-lg rounded-lg p-6 mb-8">
-      <h2 class="text-2xl font-semibold mb-4">Features</h2>
+    <section class="bg-gray-700 shadow-lg rounded-lg p-6 mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Commerce Coin Trades</h2>
       <ul class="list-disc list-inside space-y-2">
         <li class="text-lg">Responsive design out of the box</li>
         <li class="text-lg">Tiny CSS file (purged unused styles)</li>
@@ -27,28 +28,44 @@
     </section>
 
     <!-- Example card -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white shadow rounded-lg p-6 text-center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-gray-700 shadow rounded-lg p-6 text-center">
         <h3 class="text-xl font-bold">Fast</h3>
         <p>Loads instantly for all visitors</p>
       </div>
-      <div class="bg-white shadow rounded-lg p-6 text-center">
+      <div class="bg-gray-700 shadow rounded-lg p-6 text-center">
         <h3 class="text-xl font-bold">Modern</h3>
         <p>Utility-first CSS</p>
       </div>
-      <div class="bg-white shadow rounded-lg p-6 text-center">
+      <div class="bg-gray-700 shadow rounded-lg p-6 text-center">
         <h3 class="text-xl font-bold">Simple</h3>
         <p>Just HTML + Tailwind</p>
       </div>
     </div>
+
+    <!-- Add your content here with Tailwind classes -->
+    <section class="bg-gray-700 shadow-lg rounded-lg p-6">
+      <h2 class="text-2xl font-semibold mb-4">News Articles</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li class="text-lg">Responsive design out of the box</li>
+        <li class="text-lg">Tiny CSS file (purged unused styles)</li>
+        <li class="text-lg">No heavy frameworks</li>
+      </ul>
+    </section>
+
   </main>
 
-  <footer class="w-full bg-gray-800 text-white py-4 text-center">
-    <p>&copy; <span id="year"></span>
-    <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script> 
-    Pie – Hosted on GitHub Pages</p>
+  <footer class="w-full bg-gray-800 py-4 text-center">
+    <p>
+      <span class="text-gray-400">&copy;</span>
+      <span id="year"></span>
+      <script>
+          document.getElementById("year").textContent = new Date().getFullYear();
+      </script> 
+      <span class="text-gray-400">-</span> Pie
+      <span class="text-gray-400">-</span> 1046236260
+      <span class="text-gray-400">-</span> Hosted on GitHub Pages
+    </p>
   </footer>
 
 </body>
