@@ -48,7 +48,7 @@ events.forEach(event => {
     <p class="font-semibold p-0 m-0 leading-none">${event.name}</p>
     <p class="p-0 m-0 leading-none hidden">${event.timeframe}</p>
     <p class="text-sm p-0 m-0 leading-none hidden">(Local Time)</p>
-    <div id="${event.id}" class="font-mono text-cyan-300 p-0 m-0 leading-none">Calculating...</div>
+    <div id="${event.id}" class="font-mono text-cyan-300 p-0 m-0 mt-1 leading-none">Calculating...</div>
     `;
     container.appendChild(div);
 });
