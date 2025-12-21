@@ -1,4 +1,4 @@
-    const events = [
+const events = [
       { name: "Fireworks Festival (Saturday Morning)", id: "fireworks_festival_morning", day: 6, hour: 7,  minute: 30, duration: 60 },
       { name: "Fireworks Festival (Saturday Evening)", id: "fireworks_festival_evening", day: 6, hour: 19, minute: 30, duration: 60 },
       { name: "Mirage Boat (Sunday Morning)",          id: "mirage_boat_morning",        day: 0, hour: 6,  minute: 0,  duration: 120 },
@@ -12,7 +12,6 @@
 
     const container = document.getElementById('events-container');
 
-    // Create event cards
     events.forEach(event => {
       const div = document.createElement('div');
       div.className = 'bg-slate-700 rounded-lg p-6 shadow-lg';
@@ -23,84 +22,88 @@
       container.appendChild(div);
     });
 
-    // Reusable countdown with "In Progress" support
     function startCountdown(elementId, targetDay, targetHour, targetMinute = 0, eventDurationMinutes = 60) {
       const element = document.getElementById(elementId);
 
       function update() {
         const now = new Date();
-        const currentDay = now.getDay();
 
-        let daysAhead = (targetDay - currentDay + 7) % 7;
-        let nextTarget = new Date(now);
-        nextTarget.setDate(now.getDate() + daysAhead);
-        nextTarget.setHours(targetHour, targetMinute, 0, 0);
+        // Most recent past occurrence
+        let daysBack = (now.getDay() - targetDay + 7) % 7;
+        let recentTarget = new Date(now);
+        recentTarget.setDate(now.getDate() - daysBack);
+        recentTarget.setHours(targetHour, targetMinute, 0, 0);
 
-        if (nextTarget <= now) {
+        // Next occurrence
+        let nextTarget = new Date(recentTarget);
+        if (recentTarget > now) {
+          nextTarget = recentTarget;
+        } else {
           nextTarget.setDate(nextTarget.getDate() + 7);
         }
 
-        const diffToNext = nextTarget - now;
-        let displayText;
-        let sortTime = nextTarget.getTime();
+        let displayText = '';
+        let isInProgress = false;
+        let sortTime = nextTarget.getTime(); // default: next start time
 
-        if (diffToNext <= 0) {
-          const elapsedMs = -diffToNext;
-          const elapsedMinutes = Math.floor(elapsedMs / (1000 * 60));
-
+        // Check if currently in progress
+        const timeSinceStart = now - recentTarget;
+        if (timeSinceStart >= 0) {
+          const elapsedMinutes = Math.floor(timeSinceStart / (1000 * 60));
           if (elapsedMinutes < eventDurationMinutes) {
             displayText = `In Progress – ${elapsedMinutes}m elapsed`;
-            // Sort by when it ends
-            sortTime = now.getTime() + (eventDurationMinutes - elapsedMinutes) * 60 * 1000;
+            isInProgress = true;
+            // Sort by end time (so ending-soon events are higher among in-progress)
+            const endTime = new Date(recentTarget);
+            endTime.setMinutes(endTime.getMinutes() + eventDurationMinutes);
+            sortTime = endTime.getTime();
           }
         }
 
-        if (!displayText) {
-          const days = Math.floor(diffToNext / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((diffToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((diffToNext % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((diffToNext % (1000 * 60)) / 1000);
+        // Normal countdown
+        if (!isInProgress) {
+          const diff = nextTarget - now;
+          const days = Math.floor(diff / (1000*60*60*24));
+          const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+          const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+          const seconds = Math.floor((diff % (1000*60)) / 1000);
 
           let parts = [];
-          if (days >= 1) {
-            parts.push(`${days}d`);
-            parts.push(`${hours}h`);
-            parts.push(`${minutes}m`);
-          } else if (hours >= 1) {
-            parts.push(`${hours}h`);
-            parts.push(`${minutes}m`);
-          } else if (minutes >= 1) {
-            parts.push(`${minutes}m`);
-          }
+          if (days >= 1) { parts.push(`${days}d`); parts.push(`${hours}h`); parts.push(`${minutes}m`); }
+          else if (hours >= 1) { parts.push(`${hours}h`); parts.push(`${minutes}m`); }
+          else if (minutes >= 1) { parts.push(`${minutes}m`); }
           parts.push(`${seconds}s`);
           displayText = parts.join(' ');
         }
 
         element.textContent = displayText;
-        element.dataset.nextTime = sortTime;
+
+        // Store sort priority: in-progress gets huge priority boost
+        element.dataset.sortPriority = isInProgress ? '0' : '1'; // 0 = top
+        element.dataset.sortTime = sortTime;
       }
 
       update();
       setInterval(update, 1000);
     }
 
-    // Start all countdowns
     events.forEach(event => {
-      startCountdown(
-        event.id,
-        event.day,
-        event.hour,
-        event.minute,
-        event.duration || 60
-      );
+      startCountdown(event.id, event.day, event.hour, event.minute, event.duration || 60);
     });
 
-    // Sort by soonest first (including in-progress events)
+    // Sort: All In Progress first (by end time), then normal countdowns (by start time)
     setInterval(() => {
       const items = Array.from(container.children);
       items.sort((a, b) => {
-        const timeA = parseInt(a.querySelector('div[id]').dataset.nextTime || Infinity);
-        const timeB = parseInt(b.querySelector('div[id]').dataset.nextTime || Infinity);
+        const elA = a.querySelector('div[id]');
+        const elB = b.querySelector('div[id]');
+
+        const priA = elA.dataset.sortPriority || '1';
+        const priB = elB.dataset.sortPriority || '1';
+        if (priA !== priB) return priA - priB; // in-progress (0) always above
+
+        const timeA = parseInt(elA.dataset.sortTime || Infinity);
+        const timeB = parseInt(elB.dataset.sortTime || Infinity);
         return timeA - timeB;
       });
       items.forEach(item => container.appendChild(item));
