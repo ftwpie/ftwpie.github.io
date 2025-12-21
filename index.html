@@ -10,15 +10,24 @@
 </head>
 <body class="min-h-full bg-gray-900 text-gray-200 flex flex-col items-center justify-center">
 
-  <header class="w-full bg-gray-800 py-8 text-center">
-    <h1 class="text-4xl font-bold">Where Winds Meet Tools</h1>
-    <p class="mt-4 text-xl">Built with Tailwind CSS – fast and lightweight</p>
+  <header class="w-full bg-gray-800 py-4 text-center">
+    <h1 class="text-2xl font-bold">Where Winds Meet Stuff & Things</h1>
+    <p class="text-xl">By Pie from Dessert Guild</p>
   </header>
 
-  <main class="flex-1 max-w-4xl mx-auto p-8">
+  <main class="flex-1 w-full mx-auto p-8 relative">
+
+    <div class="absolute top-8 right-8">
+      <h3 class="text-xl font-bold bg-gray-800 p-3 text-center rounded-t-lg">Event Countdowns</h3>
+      <div class="bg-gray-700 shadow rounded-b-lg p-3 text-center h-80 overflow-auto">
+        <div id="events-container" class="space-y-3">
+          <!-- Events will be inserted here dynamically -->
+        </div>
+      </div>
+    </div>
 
     <!-- Add your content here with Tailwind classes -->
-    <section class="bg-gray-700 shadow-lg rounded-lg p-6 mb-8">
+    <section class="bg-gray-700 shadow-lg rounded-lg p-6 mb-8 w-fit">
       <h2 class="text-2xl font-semibold mb-4">Commerce Coin Trades</h2>
       <ul class="list-disc list-inside space-y-2">
         <li class="text-lg">Responsive design out of the box</li>
@@ -28,15 +37,13 @@
     </section>
 
     <!-- Example card -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 w-fit">
+
       <div class="bg-gray-700 shadow rounded-lg p-6 text-center">
-        <h3 class="text-xl font-bold">Fast</h3>
-        <p>Loads instantly for all visitors</p>
+        <h3 class="text-xl font-bold mb-6">Event Countdowns</h3>
+        sdfsdfsdfsdf
       </div>
-      <div class="bg-gray-700 shadow rounded-lg p-6 text-center">
-        <h3 class="text-xl font-bold">Modern</h3>
-        <p>Utility-first CSS</p>
-      </div>
+
       <div class="bg-gray-700 shadow rounded-lg p-6 text-center">
         <h3 class="text-xl font-bold">Simple</h3>
         <p>Just HTML + Tailwind</p>
@@ -44,7 +51,7 @@
     </div>
 
     <!-- Add your content here with Tailwind classes -->
-    <section class="bg-gray-700 shadow-lg rounded-lg p-6">
+    <section class="bg-gray-700 shadow-lg rounded-lg p-6 w-fit">
       <h2 class="text-2xl font-semibold mb-4">News Articles</h2>
       <ul class="list-disc list-inside space-y-2">
         <li class="text-lg">Responsive design out of the box</li>
@@ -55,18 +62,15 @@
 
   </main>
 
-  <footer class="w-full bg-gray-800 py-4 text-center">
-    <p>
-      <span class="text-gray-400">&copy;</span>
-      <span id="year"></span>
-      <script>
-          document.getElementById("year").textContent = new Date().getFullYear();
-      </script> 
-      <span class="text-gray-400">-</span> Pie
-      <span class="text-gray-400">-</span> 1046236260
-      <span class="text-gray-400">-</span> Hosted on GitHub Pages
-    </p>
+  <footer class="w-full bg-gray-800 py-4 text-center flex flex-col">
+    <div>
+      ID<span class="text-gray-400">:</span> 1046236260
+    </div>
+    <div>
+      If you find this helpful, leave an in-game profile like or gift Pie decorative paper!
+    </div>
   </footer>
 
+  <script src="./js/calendar.js"></script>
 </body>
 </html>

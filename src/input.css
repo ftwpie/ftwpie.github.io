@@ -4,3 +4,8 @@
 @theme inline {
   /* Tailwind v4 default colors are built-in when using the full import */
 }
+
+html {
+  scrollbar-color: #6b7280 #1f2937; /* thumb: gray-500, track: gray-900 (Tailwind examples) */
+  scrollbar-width: thin;                /* Makes it slimmer and more modern */
+}
