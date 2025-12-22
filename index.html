@@ -59,27 +59,24 @@
   </main>
 
   <footer class="w-full bg-gray-800 py-4 text-center flex flex-col">
-    View Count: <div id="visitor-count"></div>
     <p>Stuff and things can go in the footer one day maybe possibly.</p>
+    <span>
+      <div class="flex items-center justify-center gap-2 text-sm text-gray-400">
+  <span>Views:</span>
+  <div class="h-20 w-20">
+    <img
+    src="https://pie.goatcounter.com/counter//.svg"
+    alt="Views"
+    class="h-4"
+    style="clip-path: inset(33% 46% 33% 46%); filter: invert(1);">
+  </div>
+
+</div>
+    </span>
   </footer>
 
   <script src="./js/calendar.js"></script>
-  
-  <script data-goatcounter="https://pie.goatcounter.com/count"
-        async src="https://gc.zgo.at/count.js"></script>
-
-  <script async src="https://pie.goatcounter.com/counter.js"></script>
-
-  <script>
-    window.addEventListener('load', function () {
-      if (window.goatcounter && goatcounter.visit_count) {
-        goatcounter.visit_count({
-          append: '#visitor-count',
-          type: 'html'
-        });
-      }
-    });
-  </script>
+  <script data-goatcounter="https://pie.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>
