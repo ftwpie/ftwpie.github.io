@@ -1,6 +1,8 @@
 # ftwpie.github.io
 Where Winds Meet - Tools by Pie
 
+-- Analytics: https://pie.goatcounter.com/
+
 -- Test 1 / Update to make sure things are all linked up with credentials, etc.
 
 -- Tailwind auto-build while editing... in CMD run:
