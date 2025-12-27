@@ -1,160 +1,65 @@
-const events = [
-    // 🌍 GLOBAL EVENTS
-    { name: "Fireworks Festival", timeframe: "Saturday at 07:30", id: "fireworks_festival_one", day: 6, hour: 7,  minute: 30, duration: 30, type: 'global' },
-    { name: "Fireworks Festival", timeframe: "Saturday at 19:30", id: "fireworks_festival_two", day: 6, hour: 19, minute: 30, duration: 30, type: 'global' },
-    { name: "Mirage Boat",        timeframe: "Sunday at 06:00",  id: "mirage_boat_one",       day: 0, hour: 6,  minute: 0,  duration: 60, type: 'global' },
-    { name: "Mirage Boat",        timeframe: "Sunday at 18:00",  id: "mirage_boat_two",       day: 0, hour: 18, minute: 0,  duration: 60, type: 'global' },
-
-    // 🏰 GUILD EVENTS (Dessert Guild schedule)
-    { name: "Breaking Army",      timeframe: "Wednesday at 07:30", id: "breaking_army_one",    day: 3, hour: 7,  minute: 30, duration: 60, type: 'guild' },
-    { name: "Breaking Army",      timeframe: "Saturday at 01:00",  id: "breaking_army_two",    day: 6, hour: 1,  minute: 0,  duration: 60, type: 'guild' },
-    { name: "Showdown",           timeframe: "Thursday at 01:00",  id: "showdown_one",         day: 4, hour: 1,  minute: 0,  duration: 60, type: 'guild' },
-    { name: "Showdown",           timeframe: "Sunday at 07:30",    id: "showdown_two",         day: 0, hour: 7,  minute: 30, duration: 60, type: 'guild' },
-    { name: "Guild Party",        timeframe: "Daily at 08:30",     id: "guild_party_daily",    day: new Date().getDay(), hour: 8, minute: 30, duration: 30, type: 'guild' },
-];
-
-// Containers
-const globalContainer = document.getElementById('global-events-container');
-const guildContainer = document.getElementById('guild-events-container');
-
-// Split events
-const globalEvents = events.filter(e => e.type === 'global');
-const guildEvents = events.filter(e => e.type === 'guild');
-
-// Create Global Event Cards
-globalEvents.forEach(event => {
-    const div = document.createElement('div');
-    div.className = 'bg-indigo-900 rounded-lg p-4 shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 transition-all duration-500';
-    div.innerHTML = `
-        <p class="font-semibold leading-tight">${event.name}</p>
-        <div id="${event.id}" class="font-mono text-cyan-300 mt-2 leading-none">Calculating...</div>
-    `;
-    globalContainer.appendChild(div);
-});
-
-// Create Guild Event Cards
-guildEvents.forEach(event => {
-    const div = document.createElement('div');
-    div.className = 'bg-indigo-900 rounded-lg p-4 shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 transition-all duration-500';
-    div.innerHTML = `
-        <p class="font-semibold leading-tight">${event.name}</p>
-        <div id="${event.id}" class="font-mono text-cyan-300 mt-2 leading-none">Calculating...</div>
-    `;
-    guildContainer.appendChild(div);
-});
-
-// Countdown function (unchanged)
-function startCountdown(elementId, targetDay, targetHour, targetMinute = 0, eventDurationMinutes = 60) {
-    const element = document.getElementById(elementId);
-
-    function update() {
-        const now = new Date();
-
-        let daysBack = (now.getDay() - targetDay + 7) % 7;
-        let recentTarget = new Date(now);
-        recentTarget.setDate(now.getDate() - daysBack);
-        recentTarget.setHours(targetHour, targetMinute, 0, 0);
-
-        let nextTarget = new Date(recentTarget);
-        if (recentTarget > now) {
-            nextTarget = recentTarget;
-        } else {
-            nextTarget.setDate(nextTarget.getDate() + 7);
-        }
-
-        let displayText = '';
-        let isInProgress = false;
-        let sortTime = nextTarget.getTime();
-
-        const timeSinceStart = now - recentTarget;
-        if (timeSinceStart >= 0) {
-            const elapsedMinutes = Math.floor(timeSinceStart / (1000 * 60));
-            if (elapsedMinutes < eventDurationMinutes) {
-                displayText = `Remaining: ${eventDurationMinutes - elapsedMinutes}m`;
-                isInProgress = true;
-                const endTime = new Date(recentTarget);
-                endTime.setMinutes(endTime.getMinutes() + eventDurationMinutes);
-                sortTime = endTime.getTime();
-            }
-        }
-
-        if (!isInProgress) {
-            const diff = nextTarget - now;
-            const days = Math.floor(diff / (1000*60*60*24));
-            const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-            const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
-            const seconds = Math.floor((diff % (1000*60)) / 1000);
-
-            let parts = [];
-            if (days >= 1) { parts.push(`${days}d`); parts.push(`${hours}h`); parts.push(`${minutes}m`); }
-            else if (hours >= 1) { parts.push(`${hours}h`); parts.push(`${minutes}m`); }
-            else if (minutes >= 1) { parts.push(`${minutes}m`); }
-            parts.push(`${seconds}s`);
-            displayText = `Upcoming: ${parts.join(' ')}`;
-        }
-
-        element.textContent = displayText;
-        element.dataset.sortPriority = isInProgress ? '0' : '1';
-        element.dataset.sortTime = sortTime;
-    }
-
-    update();
-    setInterval(update, 1000);
+// Helper functions
+function getEasternUtcOffset(date) {
+  const jan = new Date(date.getFullYear(), 0, 1);
+  const jul = new Date(date.getFullYear(), 6, 1);
+  const standardOffset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+  return date.getTimezoneOffset() === standardOffset ? 5 : 4;
 }
 
-// Start all countdowns
-events.forEach(event => {
-    startCountdown(event.id, event.day, event.hour, event.minute, event.duration || 60);
-});
-
-// Sort + highlight
-function sortAndHighlight(container) {
-    const items = Array.from(container.children);
-    items.sort((a, b) => {
-        const elA = a.querySelector('div[id]');
-        const elB = b.querySelector('div[id]');
-        const priA = elA.dataset.sortPriority || '1';
-        const priB = elB.dataset.sortPriority || '1';
-        if (priA !== priB) return priA - priB;
-        const timeA = parseInt(elA.dataset.sortTime || Infinity);
-        const timeB = parseInt(elB.dataset.sortTime || Infinity);
-        return timeA - timeB;
-    });
-
-    items.forEach(item => container.appendChild(item));
-
-    // Strong highlight for top card
-    const cards = container.children;
-    if (cards.length > 0) {
-        // Reset all to normal bg
-        for (let card of cards) {
-            card.classList.remove('bg-indigo-700');
-            card.classList.add('bg-indigo-900');
-        }
-        // Highlight top
-        cards[0].classList.remove('bg-indigo-900');
-        cards[0].classList.add('bg-indigo-700');
-    }
+function formatTime(hour, minute = 0) {
+  const h = Math.floor(hour) % 24;
+  return `${h.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
 }
 
-// Run every second
-const increment = 1000;
-setInterval(() => sortAndHighlight(globalContainer), increment);
-setInterval(() => sortAndHighlight(guildContainer), increment);
+function getDayName(day) {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return day === null ? 'Daily' : days[day];
+}
 
-// Copy button
-document.querySelectorAll('.copy-btn').forEach(button => {
-    button.addEventListener('click', async () => {
-        const targetId = button.getAttribute('data-target');
-        const text = document.getElementById(targetId).textContent;
+// Generate all timeframes (UTC primary)
+function generateTimeframes(day, estHour, estMinute) {
+  // Sample date on the correct day for accurate DST detection
+  const now = new Date();
+  let sampleDate = new Date(now);
+  if (day !== null) {
+    let daysAhead = day - now.getDay();
+    if (daysAhead <= 0) daysAhead += 7;
+    sampleDate.setDate(now.getDate() + daysAhead);
+  }
+  sampleDate.setHours(estHour, estMinute, 0, 0);
 
-        try {
-            await navigator.clipboard.writeText(text);
-            button.textContent = 'Copied!';
-            setTimeout(() => button.textContent = '1046236260', 2000);
-        } catch (err) {
-            console.error('Copy failed:', err);
-            button.textContent = 'Failed';
-        }
-    });
-});
+  const easternOffset = getEasternUtcOffset(sampleDate); // 5 or 4
+  const isDst = easternOffset === 4;
+
+  // UTC
+  const utcHour = (estHour + easternOffset) % 24;
+  const utcTime = formatTime(utcHour, estMinute);
+
+  // EST/EDT
+  const estLabel = isDst ? 'EDT' : 'EST';
+  const estTime = formatTime(estHour, estMinute);
+
+  // SEA: UTC+8 (fixed)
+  const seaHour = (utcHour + 8) % 24;
+  const seaTime = formatTime(seaHour, estMinute);
+
+  // Asia (Tokyo/Seoul): UTC+9 (fixed)
+  const asiaHour = (utcHour + 9) % 24;
+  const asiaTime = formatTime(asiaHour, estMinute);
+
+  // Europe (CET/CEST): UTC+1 winter, +2 summer
+  // Simple rule: same DST period as US (March-Nov approx)
+  const europeOffset = isDst ? 2 : 1;
+  const europeHour = (utcHour + europeOffset) % 24;
+  const europeTime = formatTime(europeHour, estMinute);
+
+  const dayStr = getDayName(day);
+
+  return {
+    timeframe: `${dayStr} at ${utcTime} UTC`,
+    estTime: `${estTime} ${estLabel}`,
+    seaTime: `${seaTime} SEA`,
+    asiaTime: `${asiaTime} AS`,
+    europeTime: `${europeTime} Europe (CET/CEST)`
+  };
+}

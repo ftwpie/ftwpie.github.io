@@ -1,9 +1,63 @@
+const today = new Date().getDay();
+
 const events = [
     // 🌍 GLOBAL EVENTS
-    { name: "Fireworks Festival", timeframe: "Saturday at 07:30", id: "fireworks_festival_one", day: 6, hour: 7,  minute: 30, duration: 30, type: 'global' },
-    { name: "Fireworks Festival", timeframe: "Saturday at 19:30", id: "fireworks_festival_two", day: 6, hour: 19, minute: 30, duration: 30, type: 'global' },
-    { name: "Mirage Boat",        timeframe: "Sunday at 06:00",  id: "mirage_boat_one",       day: 0, hour: 6,  minute: 0,  duration: 60, type: 'global' },
-    { name: "Mirage Boat",        timeframe: "Sunday at 18:00",  id: "mirage_boat_two",       day: 0, hour: 18, minute: 0,  duration: 60, type: 'global' },
+    {
+        name: "Fireworks Festival",
+        id: "fireworks_festival_one",
+        day: 6,
+        hour: 7,
+        minute: 30,
+        duration: 30,
+        type: 'global',
+        timeframe: "Saturday at 12:30 UTC",
+        estTime: "07:30",
+        seaTime: "20:30",
+        asiaTime: "21:30",
+        europeTime: "13:30"
+    },
+    {
+        name: "Fireworks Festival",
+        id: "fireworks_festival_two",
+        day: 6,
+        hour: 19,
+        minute: 30,
+        duration: 30,
+        type: 'global',
+        timeframe: "Sunday at 00:30 UTC",  // Note: late Saturday night in Americas/Europe
+        estTime: "19:30",
+        seaTime: "08:30",
+        asiaTime: "09:30",
+        europeTime: "01:30"
+    },
+    {
+        name: "Mirage Boat",
+        id: "mirage_boat_one",
+        day: 0,
+        hour: 6,
+        minute: 0,
+        duration: 60,
+        type: 'global',
+        timeframe: "Sunday at 11:00 UTC",
+        estTime: "06:00",
+        seaTime: "19:00",
+        asiaTime: "20:00",
+        europeTime: "12:00"
+    },
+    {
+        name: "Mirage Boat",
+        id: "mirage_boat_two",
+        day: 0,
+        hour: 18,
+        minute: 0,
+        duration: 60,
+        type: 'global',
+        timeframe: "Sunday at 23:00 UTC",
+        estTime: "18:00",
+        seaTime: "07:00",
+        asiaTime: "08:00",
+        europeTime: "00:00"
+    },
 ];
 
 // Containers
@@ -18,7 +72,27 @@ globalEvents.forEach(event => {
     const div = document.createElement('div');
     div.className = 'bg-indigo-900 rounded-lg p-4 shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 transition-all duration-500';
     div.innerHTML = `
-        <p class="font-semibold leading-tight">${event.name}</p>
+        <p class="font-semibold leading-tight mb-2">${event.name}</p>
+
+        <p class="text-sm leading-tight opacity-70">${event.timeframe}</p>
+
+        <div class="flex flex-row space-x-2 justify-center">
+            <p class="text-sm leading-tight opacity-70">East Asia</p>
+            <p class="text-sm leading-tight opacity-70">${event.asiaTime}</p>
+        </div>
+        <div class="flex flex-row space-x-2 justify-center">
+            <p class="text-sm leading-tight opacity-70">Southeast Asia</p>
+            <p class="text-sm leading-tight opacity-70">${event.seaTime}</p>
+        </div>
+        <div class="flex flex-row space-x-2 justify-center">
+            <p class="text-sm leading-tight opacity-70">Europe (CET/CEST)</p>
+            <p class="text-sm leading-tight opacity-70">${event.europeTime}</p>
+        </div>
+        <div class="flex flex-row space-x-2 justify-center">
+            <p class="text-sm leading-tight opacity-70">America (EST)</p>
+            <p class="text-sm leading-tight opacity-70">${event.estTime}</p>
+        </div>
+
         <div id="${event.id}" class="font-mono text-cyan-300 mt-2 leading-none">Calculating...</div>
     `;
     globalContainer.appendChild(div);
