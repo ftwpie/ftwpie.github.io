@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where Winds Meet Tools v0.1</title>
+  <!-- Link to the built, minified Tailwind CSS (super small!) -->
+  <link href="./css/output.css" rel="stylesheet">
+</head>
+<body class="min-h-full bg-red-950 text-gray-200 flex flex-col justify-between space-y-2">
+
+    <div class="flex flex-col flex-start space-y-2">
+        <nav class="bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
+            <ul class="flex space-x-2 text-white w-full p-2 justify-center"> 
+            <li class="bg-red-900 rounded shadow cursor-pointer hover:bg-rose-800">
+                <a href="/" class="text-base px-4 hover:underline">Home</a>
+            </li>
+            <li class="opacity-50 bg-red-900 rounded shadow cursor-pointer hover:bg-rose-800">
+                <a href="/news.html" class="text-base px-4 hover:underline">Pie News</a>
+            </li>
+            <li class="bg-red-900 rounded shadow cursor-pointer hover:bg-rose-800">
+                <a href="/dessert.html" class="text-base px-4 hover:underline">Dessert Guild</a>
+            </li>
+            <li class="bg-red-900 rounded shadow cursor-pointer hover:bg-rose-800">
+                <a href="/guides.html" class="text-base px-4 hover:underline">Pie Guides</a>
+            </li>
+            </ul>
+        </nav>
+
+        <header class="hidden w-full bg-gray-800 p-0 flex flex-col lg:flex-row justify-between">
+            <div class="flex-row hidden lg:flex">
+            <img class="h-18 mr-4" src="./images/pie/southern-whispers-dark-bg.png"/>
+            <div class="flex flex-col h-18 justify-center">
+                <h1 class="lg:text-lg font-bold">Where Winds Meet Stuff & Things</h1>
+                <p class="">By Pie from Dessert Guild</p>
+            </div>
+            </div>
+            <div class="h-18 flex flex-col justify-center text-center lg:text-right py-2 pr-4">
+            <div>
+                Pie's Character ID<span class="text-gray-400">:</span> 
+                <span class="hidden" id="text-to-copy">1046236260</span>
+                <button class="copy-btn px-1 py-0 rounded shadow cursor-pointer bg-rose-900" data-target="text-to-copy">1046236260</button>
+            </div>
+            <div class="text-sm lg:text-normal">
+                <span>Like my profile & gift Pie fun stuff & things!</span>
+            </div>
+            </div>
+        </header>
+
+        <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full">
+            <h2 class="text-xl font-bold mb-2">📢 Pie News</h2>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+            <!-- article 1 -->
+            <div class="bg-indigo-900 rounded-lg p-4 shadow-lg transition-all duration-500">
+                <h3 class="text-lg bg-purple-950 px-2 py-1 mb-2 shadow rounded w-fit">23 December, 2025</h3>
+                <ul>
+                <li>💖 Pie received her first Decorative Floral Paper! Thank you so much, <b>Hyena (1039728002)</b>!</li>
+                <li>🦄 Pie to her surprise received many likes playing the new Erhu instrument. Thanks for the support, <b>ZorroGuevara (1029573438)</b>!</li>
+                </ul>
+            </div>
+            <!-- article 2 -->
+            <div class="bg-indigo-900 rounded-lg p-4 shadow-lg transition-all duration-500">
+                <h3 class="text-lg bg-purple-950 px-2 py-1 mb-2 shadow rounded w-fit">17 December, 2025</h3>
+                <ul>
+                <li>💍 Pie married her most excellent partner she can vibe with forever, <b>Juvia (2059718360)</b>!</li>
+                <li>🫦 Pie is no longer sectless and has joined Velvet Shade. Pie is shy but hopes to learn how to become flirty and seductive :3</li>
+                </ul>
+            </div>
+            <!-- article 3 -->
+            <div class="bg-indigo-900 rounded-lg p-4 shadow-lg transition-all duration-500">
+                <h3 class="text-lg bg-purple-950 px-2 py-1 mb-2 shadow rounded w-fit">22 November, 2025</h3>
+                <ul>
+                <li>🥧 Unbeknownst to Pie, a sworn cohort was formed in honor of an apple pie she baked. The sworn cohort name is Apple Pie and it has filled up fast!</li>
+                </ul>
+            </div>
+            <!-- article 4 -->
+            <div class="bg-indigo-900 rounded-lg p-4 shadow-lg transition-all duration-500">
+                <h3 class="text-lg bg-purple-950 px-2 py-1 mb-2 shadow rounded w-fit">18 November, 2025</h3>
+                <ul>
+                <li>🍰 Pie was so lonely searching for a guild she would feel at home at. Pie finally stumbled on the Dessert guild and begged to be allowed in. After a long time proving Pie was not a spy, Pie became a true dessert!</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 -mb-2 px-4 py-1">
+        <p>⚠️ This project is currently a work in progress :)</p>
+    </footer>
+
+    <script data-goatcounter="https://pie.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>
