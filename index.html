@@ -8,7 +8,7 @@
   <!-- Link to the built, minified Tailwind CSS (super small!) -->
   <link href="./css/output.css" rel="stylesheet">
 </head>
-<body data-type="global" class="min-h-full bg-red-950 text-gray-200 flex flex-col justify-between space-y-2">
+<body data-type="global" class="min-h-screen bg-red-950 text-gray-200 flex flex-col justify-between space-y-2">
 
   <div class="flex flex-col flex-start space-y-2">
 
@@ -80,23 +80,23 @@
       
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY >= lastScrollY && new Date() - last_scroll >= 250 && width <= 768) {
+      if (currentScrollY >= lastScrollY && new Date() - last_scroll >= 100 && width <= 768) {
         //if(last_scroll == null || new Date() - last_scroll >= 1000) {
           lastScrollY = currentScrollY;
           console.log('Scrolling DOWN');
           document.getElementById('direction').textContent = '↓ Scrolling DOWN';
-          document.getElementById('nav').classList.remove('sticky', 'top-0');
-          document.getElementById('nav').classList.add('fixed', '-top-34');
+          document.getElementById('nav').classList.remove('top-0');
+          document.getElementById('nav').classList.add('-top-34');
           last_scroll = new Date();
           // Add your "down" logic here (e.g., hide header)
         //}
-      } else if (currentScrollY < lastScrollY && new Date() - last_scroll >= 250 && width <= 768) {
+      } else if (currentScrollY < lastScrollY && new Date() - last_scroll >= 100 && width <= 768) {
         //if(last_scroll == null || new Date() - last_scroll >= 1000) {
           lastScrollY = currentScrollY;
           console.log('Scrolling UP');
           document.getElementById('direction').textContent = '↑ Scrolling UP';
-          document.getElementById('nav').classList.remove('fixed', '-top-34');
-          document.getElementById('nav').classList.add('sticky', 'top-0');
+          document.getElementById('nav').classList.remove('-top-34');
+          document.getElementById('nav').classList.add('top-0');
           last_scroll = new Date();
           // Add your "up" logic here (e.g., show header)
         //}
