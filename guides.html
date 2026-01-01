@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where Winds Meet Tools v0.1</title>
+  <!-- Link to the built, minified Tailwind CSS (super small!) -->
+  <link href="./css/output.css" rel="stylesheet">
+</head>
+<body class="min-h-full bg-red-950 text-gray-200 flex flex-col justify-between space-y-2">
+
+    <div class="flex flex-col flex-start space-y-2">
+        <nav class="bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
+            <ul class="flex space-x-0 space-y-2 text-white w-full p-2 justify-center flex-col md:flex-row md:space-y-0 md:space-x-2 text-center"> 
+                <li class="bg-red-900 rounded shadow cursor-pointer">
+                    <a href="/" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Home</a>
+                </li>
+                <li class="bg-red-900 rounded shadow cursor-pointer">
+                    <a href="/dessert.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Dessert Guild</a>
+                </li>
+                <li class="bg-red-900 rounded shadow cursor-pointer">
+                    <a href="/news.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Pie News</a>
+                </li>
+                <li class="opacity-50 bg-red-900 rounded shadow cursor-pointer">
+                    <a href="/guides.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Pie Guides</a>
+                </li>
+            </ul>
+        </nav>
+
+        <header class="hidden w-full bg-gray-800 p-0 flex flex-col lg:flex-row justify-between">
+            <div class="flex-row hidden lg:flex">
+            <img class="h-18 mr-4" src="./images/pie/southern-whispers-dark-bg.png"/>
+            <div class="flex flex-col h-18 justify-center">
+                <h1 class="lg:text-lg font-bold">Where Winds Meet Stuff & Things</h1>
+                <p class="">By Pie from Dessert Guild</p>
+            </div>
+            </div>
+            <div class="h-18 flex flex-col justify-center text-center lg:text-right py-2 pr-4">
+            <div>
+                Pie's Character ID<span class="text-gray-400">:</span> 
+                <span class="hidden" id="text-to-copy">1046236260</span>
+                <button class="copy-btn px-1 py-0 rounded shadow cursor-pointer bg-rose-900" data-target="text-to-copy">1046236260</button>
+            </div>
+            <div class="text-sm lg:text-normal">
+                <span>Like my profile & gift Pie fun stuff & things!</span>
+            </div>
+            </div>
+        </header>
+
+        <div class="text-center">
+            Guides stuff coming soonz
+        </div>
+    </div>
+
+    <footer class="text-center text-sm bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 -mb-2 px-4 py-1">
+        <p>⚠️ This project is currently a work in progress :)</p>
+    </footer>
+
+    <script src="./js/calendar.js"></script>
+
+    <script data-goatcounter="https://pie.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

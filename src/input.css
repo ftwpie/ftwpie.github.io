@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* This enables the default color palette and theme */
+@theme inline {
+  /* Tailwind v4 default colors are built-in when using the full import */
+}
+
+/* Dark scrollbar */
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #6b7280 #1f2937;
+    }
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1f2937;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6b7280;
+      border-radius: 6px;
+      border: 3px solid #1f2937;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
