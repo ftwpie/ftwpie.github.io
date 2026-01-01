@@ -16,3 +16,5 @@ tailwindcss.exe -i ./src/input.css -o ./css/output.css --minify
 
 -- Test 2 / Update to style, add test images and content
     -- some notes - we need to re-run images through compression algorithm they're MB in size so yeh...
+
+-- Test 3 / (1/1/2026) started repo again from scratch (with code copied of course), testing.
