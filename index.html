@@ -11,7 +11,8 @@
 <body data-type="global" class="min-h-full bg-red-950 text-gray-200 flex flex-col justify-between space-y-2">
 
   <div class="flex flex-col flex-start space-y-2">
-      <nav class="bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
+
+      <nav id="nav" class="transition-all h-34 md:h-auto bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
           <ul class="flex space-x-0 space-y-2 text-white w-full p-2 justify-center flex-col md:flex-row md:space-y-0 md:space-x-2 text-center"> 
             <li class="opacity-50 bg-red-900 rounded shadow cursor-pointer">
               <a href="/" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Home</a>
@@ -61,7 +62,7 @@
     </div>
   </div>
 
-  <footer class="text-center text-sm bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 -mb-2 px-4 py-1">
+  <footer id="footer" class="text-center text-sm bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 -mb-2 px-4 py-1">
     <p>⚠️ This project is currently a work in progress :)</p>
   </footer>
 
@@ -72,23 +73,37 @@
 
   <script>
     let lastScrollY = window.scrollY;
+    let width = window.innerWidth;
+    let last_scroll = new Date();
 
     window.addEventListener('scroll', () => {
+      
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY) {
-        console.log('Scrolling DOWN');
-        document.getElementById('direction').textContent = '↓ Scrolling DOWN';
-        // Add your "down" logic here (e.g., hide header)
-      } else if (currentScrollY < lastScrollY) {
-        console.log('Scrolling UP');
-        document.getElementById('direction').textContent = '↑ Scrolling UP';
-        // Add your "up" logic here (e.g., show header)
+      if (currentScrollY >= lastScrollY && new Date() - last_scroll >= 250 && width <= 768) {
+        //if(last_scroll == null || new Date() - last_scroll >= 1000) {
+          lastScrollY = currentScrollY;
+          console.log('Scrolling DOWN');
+          document.getElementById('direction').textContent = '↓ Scrolling DOWN';
+          document.getElementById('nav').classList.remove('sticky', 'top-0');
+          document.getElementById('nav').classList.add('fixed', '-top-34');
+          last_scroll = new Date();
+          // Add your "down" logic here (e.g., hide header)
+        //}
+      } else if (currentScrollY < lastScrollY && new Date() - last_scroll >= 250 && width <= 768) {
+        //if(last_scroll == null || new Date() - last_scroll >= 1000) {
+          lastScrollY = currentScrollY;
+          console.log('Scrolling UP');
+          document.getElementById('direction').textContent = '↑ Scrolling UP';
+          document.getElementById('nav').classList.remove('fixed', '-top-34');
+          document.getElementById('nav').classList.add('sticky', 'top-0');
+          last_scroll = new Date();
+          // Add your "up" logic here (e.g., show header)
+        //}
       }
-      // If equal, no change (e.g., at top/bottom bounce on mobile)
 
-      lastScrollY = currentScrollY;
     });
+
   </script>
 
 </body>
