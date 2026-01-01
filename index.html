@@ -48,6 +48,8 @@
       </div>
     </header>
 
+    <div id="direction">Scroll to see direction</div>
+
     <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full">
       <h2 class="text-xl font-bold mb-2">🌍 Global Events</h2>
       <div id="global-events-container" class="flex flex-wrap justify-center gap-2 md:gap-4">
@@ -67,6 +69,27 @@
   <script type="module" src="./js/events/entry.js"></script>
 
   <!--<script data-goatcounter="https://pie.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>-->
+
+  <script>
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        console.log('Scrolling DOWN');
+        document.getElementById('direction').textContent = '↓ Scrolling DOWN';
+        // Add your "down" logic here (e.g., hide header)
+      } else if (currentScrollY < lastScrollY) {
+        console.log('Scrolling UP');
+        document.getElementById('direction').textContent = '↑ Scrolling UP';
+        // Add your "up" logic here (e.g., show header)
+      }
+      // If equal, no change (e.g., at top/bottom bounce on mobile)
+
+      lastScrollY = currentScrollY;
+    });
+  </script>
 
 </body>
 </html>
