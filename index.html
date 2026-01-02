@@ -8,11 +8,11 @@
   <!-- Link to the built, minified Tailwind CSS (super small!) -->
   <link href="./css/output.css" rel="stylesheet">
 </head>
-<body data-type="global" class="min-h-screen bg-red-950 text-gray-200 flex flex-col justify-between space-y-2">
+<body data-type="global" class="min-h-screen bg-red-950 text-gray-200 flex flex-col justify-between overflow-y-auto relative">
 
   <div class="flex flex-col flex-start space-y-2">
 
-      <nav id="nav" class="transition-all h-34 md:h-auto bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
+      <nav id="nav" class="transition-all duration-500 ease-in-out h-34 md:h-auto bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
           <ul class="flex space-x-0 space-y-2 text-white w-full p-2 justify-center flex-col md:flex-row md:space-y-0 md:space-x-2 text-center"> 
             <li class="opacity-50 bg-red-900 rounded shadow cursor-pointer">
               <a href="/" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Home</a>
@@ -51,7 +51,7 @@
 
     <div class="hidden" id="direction">Scroll to see direction</div>
 
-    <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full">
+    <div class="bg-indigo-950 shadow px-2 pb-2 pt-3 text-center overflow-auto w-full">
       <h2 class="text-xl font-bold mb-2">🌍 Global Events</h2>
       <div id="global-events-container" class="flex flex-wrap justify-center gap-2 md:gap-4">
         <!-- Global events inserted here -->
@@ -60,10 +60,16 @@
         Disclaimer: This is a fun project built by Pie, times are not promised to always remain accurate.
       </p>
     </div>
+
+    <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full mb-2">
+        <h2 class="text-xl font-bold mb-2">Testing Stuff</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lobortis in purus eget imperdiet. Morbi eget porttitor diam, non blandit sem. Suspendisse potenti. Curabitur ornare mauris et pellentesque malesuada. Aenean ut neque eu metus facilisis laoreet. Curabitur id ullamcorper turpis, non auctor ligula. Sed imperdiet eu ante nec fermentum. Donec facilisis volutpat volutpat. Nulla vel nisl in felis consectetur feugiat. Aenean fermentum cursus ante at molestie. Suspendisse in dictum urna. Duis luctus sem a lectus ullamcorper molestie. Suspendisse gravida dignissim nisi, non aliquam risus malesuada eu.</p>
+    </div>
+
   </div>
 
-  <footer id="footer" class="text-center text-sm bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 -mb-2 px-4 py-1">
-    <p>⚠️ This project is currently a work in progress :)</p>
+  <footer id="footer" class="transition-all duration-500 ease-in-out h-8 text-center text-sm bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 px-4 py-1">
+    <p>⚠️ Currently a work in progress :)</p>
   </footer>
 
   <script src="./js/calendar.js"></script>
@@ -73,31 +79,41 @@
 
   <script>
     let lastScrollY = window.scrollY;
-    let width = window.innerWidth;
-    let last_scroll = new Date();
 
     window.addEventListener('scroll', () => {
       
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY >= lastScrollY && new Date() - last_scroll >= 100 && width <= 768) {
+      let width = window.innerWidth;
+
+      if (currentScrollY >= lastScrollY && width <= 768) {
         //if(last_scroll == null || new Date() - last_scroll >= 1000) {
+          document.getElementById('direction').textContent = '↓ Scrolling DOWN';
+
+          document.getElementById('nav').classList.remove('top-0', 'sticky');
+          document.getElementById('nav').classList.add('-top-34', 'fixed');
+
+          document.getElementById('footer').classList.remove('-bottom-8', 'fixed');
+          document.getElementById('footer').classList.add('bottom-0', 'sticky');
+
           lastScrollY = currentScrollY;
           console.log('Scrolling DOWN');
-          document.getElementById('direction').textContent = '↓ Scrolling DOWN';
-          document.getElementById('nav').classList.remove('top-0');
-          document.getElementById('nav').classList.add('-top-34');
-          last_scroll = new Date();
+          //last_scroll = new Date();
           // Add your "down" logic here (e.g., hide header)
         //}
-      } else if (currentScrollY < lastScrollY && new Date() - last_scroll >= 100 && width <= 768) {
+      } else if (currentScrollY < lastScrollY && width <= 768) {
         //if(last_scroll == null || new Date() - last_scroll >= 1000) {
+          document.getElementById('direction').textContent = '↑ Scrolling UP';
+
+          document.getElementById('nav').classList.remove('-top-34', 'fixed');
+          document.getElementById('nav').classList.add('top-0', 'sticky');
+
+          document.getElementById('footer').classList.remove('bottom-0', 'sticky');
+          document.getElementById('footer').classList.add('-bottom-8', 'fixed');
+
           lastScrollY = currentScrollY;
           console.log('Scrolling UP');
-          document.getElementById('direction').textContent = '↑ Scrolling UP';
-          document.getElementById('nav').classList.remove('-top-34');
-          document.getElementById('nav').classList.add('top-0');
-          last_scroll = new Date();
+          //last_scroll = new Date();
           // Add your "up" logic here (e.g., show header)
         //}
       }
