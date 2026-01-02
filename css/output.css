@@ -209,6 +209,12 @@
   .-top-34 {
     top: calc(var(--spacing) * -34);
   }
+  .-top-36 {
+    top: calc(var(--spacing) * -36);
+  }
+  .-top-40 {
+    top: calc(var(--spacing) * -40);
+  }
   .-top-100 {
     top: calc(var(--spacing) * -100);
   }
@@ -509,6 +515,9 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
+  }
+  .text-\[0\] {
+    color: 0;
   }
   .text-cyan-300 {
     color: var(--color-cyan-300);
