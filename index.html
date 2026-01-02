@@ -62,7 +62,7 @@
     </div>
 
     <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full mb-2 flex flex-col grow h-full justify-center">
-        <h2 class="text-xl font-bold mb-2">Testing Stuff</h2>
+        <h2 class="text-xl font-bold mb-2">Last Update: <span id="timestamp"></span></h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lobortis in purus eget imperdiet. Morbi eget porttitor diam, non blandit sem. Suspendisse potenti. Curabitur ornare mauris et pellentesque malesuada. Aenean ut neque eu metus facilisis laoreet. Curabitur id ullamcorper turpis, non auctor ligula. Sed imperdiet eu ante nec fermentum. Donec facilisis volutpat volutpat. Nulla vel nisl in felis consectetur feugiat. Aenean fermentum cursus ante at molestie. Suspendisse in dictum urna. Duis luctus sem a lectus ullamcorper molestie. Suspendisse gravida dignissim nisi, non aliquam risus malesuada eu.</p>
     </div>
 
@@ -71,6 +71,10 @@
   <footer id="footer" class="transition-all duration-500 ease-in-out h-8 text-center text-sm bg-gray-900 sticky bottom-0 shadow-lg w-full z-50 px-4 py-1">
     <p>⚠️ Currently a work in progress :)</p>
   </footer>
+
+  <script>
+    document.getElementById('timestamp').textContent = new Date().toLocaleString();
+  </script>
 
   <script src="./js/navigation.js"></script>
   <script src="./js/calendar.js"></script>
