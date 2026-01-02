@@ -10,23 +10,23 @@
 </head>
 <body data-type="global" class="transition-all duration-500 ease-in-out min-h-screen bg-red-950 text-gray-200 flex flex-col justify-between overflow-y-auto">
 
-  <div class="transition-all duration-500 ease-in-out flex flex-col flex-start space-y-2">
+  <div class="flex flex-col flex-start grow space-y-2">
 
-      <nav id="nav" class="transition-all duration-500 ease-in-out h-34 md:h-auto bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
-          <ul class="flex space-x-0 space-y-2 text-white w-full p-2 justify-center flex-col md:flex-row md:space-y-0 md:space-x-2 text-center"> 
-            <li class="opacity-50 bg-red-900 rounded shadow cursor-pointer">
-              <a href="/" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Home</a>
-            </li>
-            <li class="bg-red-900 rounded shadow cursor-pointer">
-              <a href="/dessert.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Dessert Guild</a>
-            </li>
-            <li class="bg-red-900 rounded shadow cursor-pointer">
-              <a href="/news.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Pie News</a>
-            </li>
-            <li class="bg-red-900 rounded shadow cursor-pointer">
-              <a href="/guides.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Pie Guides</a>
-            </li>
-        </ul>
+    <nav id="nav" class="transition-all duration-500 ease-in-out h-34 md:h-auto bg-gray-900 sticky top-0 shadow-lg w-full z-50">  <!-- Adjust colors to match your theme -->
+        <ul class="flex space-x-0 space-y-2 text-white w-full p-2 justify-center flex-col md:flex-row md:space-y-0 md:space-x-2 text-center"> 
+          <li class="opacity-50 bg-red-900 rounded shadow cursor-pointer">
+            <a href="/" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Home</a>
+          </li>
+          <li class="bg-red-900 rounded shadow cursor-pointer">
+            <a href="/dessert.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Dessert Guild</a>
+          </li>
+          <li class="bg-red-900 rounded shadow cursor-pointer">
+            <a href="/news.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Pie News</a>
+          </li>
+          <li class="bg-red-900 rounded shadow cursor-pointer">
+            <a href="/guides.html" class="flex flex-row grow justify-center h-full w-full rounded text-base px-4 hover:underline hover:bg-rose-800">Pie Guides</a>
+          </li>
+      </ul>
     </nav>
 
     <header class="hidden w-full bg-gray-800 p-0 flex flex-col lg:flex-row justify-between">
@@ -61,7 +61,7 @@
       </p>
     </div>
 
-    <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full mb-2">
+    <div class="bg-indigo-950 shadow p-2 text-center overflow-auto w-full mb-2 flex flex-col grow h-full justify-center">
         <h2 class="text-xl font-bold mb-2">Testing Stuff</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lobortis in purus eget imperdiet. Morbi eget porttitor diam, non blandit sem. Suspendisse potenti. Curabitur ornare mauris et pellentesque malesuada. Aenean ut neque eu metus facilisis laoreet. Curabitur id ullamcorper turpis, non auctor ligula. Sed imperdiet eu ante nec fermentum. Donec facilisis volutpat volutpat. Nulla vel nisl in felis consectetur feugiat. Aenean fermentum cursus ante at molestie. Suspendisse in dictum urna. Duis luctus sem a lectus ullamcorper molestie. Suspendisse gravida dignissim nisi, non aliquam risus malesuada eu.</p>
     </div>
@@ -72,55 +72,11 @@
     <p>⚠️ Currently a work in progress :)</p>
   </footer>
 
+  <script src="./js/navigation.js"></script>
   <script src="./js/calendar.js"></script>
   <script type="module" src="./js/events/entry.js"></script>
 
   <!--<script data-goatcounter="https://pie.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>-->
-
-  <script>
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-      
-      const currentScrollY = window.scrollY;
-
-      let width = window.innerWidth;
-
-      if (currentScrollY >= lastScrollY && width <= 768) {
-        //if(last_scroll == null || new Date() - last_scroll >= 1000) {
-          document.getElementById('direction').textContent = '↓ Scrolling DOWN';
-
-          document.getElementById('nav').classList.remove('top-0', 'sticky');
-          document.getElementById('nav').classList.add('-top-34', 'fixed');
-
-          document.getElementById('footer').classList.remove('-bottom-8', 'fixed');
-          document.getElementById('footer').classList.add('bottom-0', 'sticky');
-
-          lastScrollY = currentScrollY;
-          console.log('Scrolling DOWN');
-          //last_scroll = new Date();
-          // Add your "down" logic here (e.g., hide header)
-        //}
-      } else if (currentScrollY < lastScrollY && width <= 768) {
-        //if(last_scroll == null || new Date() - last_scroll >= 1000) {
-          document.getElementById('direction').textContent = '↑ Scrolling UP';
-
-          document.getElementById('nav').classList.remove('-top-34', 'fixed');
-          document.getElementById('nav').classList.add('top-0', 'sticky');
-
-          document.getElementById('footer').classList.remove('bottom-0', 'sticky');
-          document.getElementById('footer').classList.add('-bottom-8', 'fixed');
-
-          lastScrollY = currentScrollY;
-          console.log('Scrolling UP');
-          //last_scroll = new Date();
-          // Add your "up" logic here (e.g., show header)
-        //}
-      }
-
-    });
-
-  </script>
 
 </body>
 </html>

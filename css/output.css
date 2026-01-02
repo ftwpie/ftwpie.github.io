@@ -203,6 +203,9 @@
   .sticky {
     position: sticky;
   }
+  .-top-30 {
+    top: calc(var(--spacing) * -30);
+  }
   .-top-34 {
     top: calc(var(--spacing) * -34);
   }
